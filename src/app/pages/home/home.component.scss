@@ -1,0 +1,12 @@
+
+.student-crud-home{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .student-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px; 
+    }
+}
