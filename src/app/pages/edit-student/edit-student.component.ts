@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-edit-student',
@@ -7,13 +6,6 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './edit-student.component.html',
   styleUrl: './edit-student.component.scss'
 })
-export class EditStudentComponent implements OnInit {
-  
-  constructor(private route: ActivatedRoute){}
+export class EditStudentComponent {
 
-  userId: string | null = null;
-
-  ngOnInit(): void {
-    this.userId = this.route.snapshot.paramMap.get('id')
-  }
 }
