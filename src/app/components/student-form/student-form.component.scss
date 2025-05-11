@@ -1,0 +1,86 @@
+@use '../../styles/variables' as *;
+
+.student-form{
+    .back{
+        display: inline-block;
+        gap: 4px;
+        padding: 10px 16px;
+        border-radius: 16px;
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(234, 234, 234);
+        }
+    }
+
+    main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+
+        .title{
+            color: $color-principal
+        }
+        .description{
+            color: $color-texto-secundario;
+        }
+
+        .form{
+            padding: 24px;
+            border: 1px solid rgb(186, 185, 185);
+            border-radius: 16px;
+            width: 600px;
+            gap: 18px;
+            display: flex;
+            flex-direction: column;
+            .input-group{
+                display: flex;
+                gap: 24px;
+                .input-item{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    label{
+                        font-size: 12px;
+                        font-weight: bold;
+                    }
+                    input{
+                        padding: 6px 12px;
+                        border-radius: 6px;
+                        border: 1px solid rgb(196, 196, 196);
+                    }
+                    p{
+                        font-size: 12px;
+                        color: gray;
+                    }
+                }
+            }
+
+            .actions{
+                display: flex;
+                gap: 6px;
+                justify-content: end;
+
+                button{
+                    padding: 10px 12px;
+                    border-radius: 12px;
+                    border: 1px solid rgb(196, 196, 196);
+                    background-color: white;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: rgb(242, 242, 242);
+                    }
+
+                    &.action{
+                        background-color: #00A79D;
+                        color: white;
+                        &:hover{
+                            background-color: #04b4a8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

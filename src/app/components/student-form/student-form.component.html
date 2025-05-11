@@ -1,0 +1,66 @@
+<div class="student-form">
+    <div class="back" (click)="toHome()">
+        <p><span>{{`<-`}}</span> Volver</p>
+    </div>
+    
+    <main>
+        <h1 class="title">{{title}}</h1>
+        <p class="description">{{description}}</p>
+        <div class="form">
+            <div class="input-group">
+                <div class="input-item">
+                    <label for="">Nombre</label>
+                    <input type="text" placeholder="Juan" [formControl]="name">
+                    <pre>
+                        <code>
+                            <p>{{ name.errors| json}}</p>
+                        </code>
+                    </pre>
+                 
+                </div>
+                <div class="input-item">
+                    <label for="">Apellido</label>
+                    <input type="text" placeholder="Perez" [formControl]="lastName">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-item">
+                    <label for="">Email</label>
+                    <input type="email" placeholder="juan.perez@ejemplo.com" [formControl]="email">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-item">
+                    <label for="">Telefono</label>
+                    <input type="text" placeholder="555-2222-3333" [formControl]="phoneNumber">
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <div class="input-item">
+                    <label for="">Fecha de nacimiento</label>
+                    <input type="date" [formControl]="birthdate">
+                    <p>tu fecha de nacimiento es para calcular tu edad.</p>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-item">
+                    <label for="">Carrera</label>
+                    <input type="text" placeholder="Medicina" [formControl]="career">
+                </div>
+            </div>
+
+            <div class="actions">
+                <button (click)="toHome()">Cancelar</button>
+                <button (click)="actionFunction()" class="action">{{action}}</button>
+            </div>
+
+        </div>
+       
+    </main>
+    
+    
+</div>
