@@ -11,8 +11,15 @@ export class EditStudentComponent {
   title: string = 'Editar Estudiante'
   description: string = 'Actualizar la información del estudiante'
   action: string = 'Actualizar'
-
-  actionFunction(){
-    console.log('editar')
+  
+  actionFunction(payload: {
+    name: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    birthdate: Date,
+    career: string
+  }){
+    console.log(payload)
   }
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,22 +9,55 @@ import { Router } from '@angular/router';
   templateUrl: './student-form.component.html',
   styleUrl: './student-form.component.scss'
 })
-export class StudentFormComponent {
+export class StudentFormComponent implements OnInit{
   constructor(private router: Router){}
 
   @Input() title!: string  
   @Input() description!: string
   @Input() action!: string
-  @Input() actionFunction!: () => void
-  
+  @Input() actionFunction!: (payload: {
+    name: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    birthdate: Date,
+    career: string
+  }) => void
+  @Input() validators: {[key: string]: any[]} = {};
+
+  ngOnInit(): void {
+    this.form.get('name')?.setValidators(this.validators['name'] || [])
+    this.form.get('lastName')?.setValidators(this.validators['lastName'] || [])
+    this.form.get('email')?.setValidators(this.validators['email'] || [])
+    this.form.get('phoneNumber')?.setValidators(this.validators['phoneNumber'] || [])
+    this.form.get('birthdate')?.setValidators(this.validators['birthdate'] || [])
+    this.form.get('career')?.setValidators(this.validators['career'] || [])
+  }
+
+  public form: FormGroup = new FormGroup({
+    name: new FormControl('') ,
+    lastName: new FormControl(''),
+    email: new FormControl(''),
+    phoneNumber: new FormControl(''),
+    birthdate: new FormControl(''),
+    career: new FormControl('')
+  })
+
+  public validForm: Boolean = true
   toHome(){
     this.router.navigate(['/'])
   }
+  
+  onSubmit(){
+    if(this.form.invalid) {
+      this.validForm = false
+      return;
+    }
+    this.validForm = true
+    
+    this.actionFunction(this.form.value)
+    
+  }
 
-  name = new FormControl('');
-  lastName = new FormControl('');
-  email = new FormControl('');
-  phoneNumber = new FormControl('');
-  birthdate = new FormControl('');
-  career = new FormControl('');
+  
 }
