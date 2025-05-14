@@ -1,5 +1,16 @@
 services:
 
+  app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    depends_on:
+      - db
+      - api
+    networks:
+      - student_network
   api:
     build: 
       context: ./backend
