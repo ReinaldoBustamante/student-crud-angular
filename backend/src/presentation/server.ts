@@ -16,10 +16,10 @@ export class ServerApp{
 
     start(){
         const app = express()
-        app.use(express.json())
         app.use(cors())
+        app.use(express.json())
         app.use('/api', this.ROUTES)
 
-        app.listen(3000, () => console.log(`Server listing on port ${this.PORT}`))
+        app.listen(this.PORT, () => console.log(`Server listing on port ${this.PORT}`))
     }
 }

@@ -85,16 +85,21 @@ export class StudentControllers {
     public updateStudent = async (req: Request, res: Response) => {
         const [error, updateStudentDto] = UpdateStudentDto.create(req.body)
         const id = +req.params.id
-        const studentEmailExists = !!(await prisma.student.findUnique({
-            where:{
-                email: updateStudentDto?.email || ''
+        
+        const otherStudents = await prisma.student.findMany({
+            where: {
+                NOT: {
+                    id: id
+                }
             }
-        }))
+        })
         const studentExists = !!(await prisma.student.findUnique({
             where: {
                 id: id
             }
         }))
+        const studentEmailExists = otherStudents.some(student => student.email === updateStudentDto?.email)
+        console.log(studentEmailExists)
         try {
             if(error) CustomError.badRequest('datos invalidos');
             if(!studentExists) throw CustomError.notFound(`student with id: ${id} not exists`);
