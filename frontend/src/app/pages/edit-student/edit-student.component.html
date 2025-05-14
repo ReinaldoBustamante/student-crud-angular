@@ -1,8 +1,10 @@
 <div class="edit-student">
     <app-student-form
+        *ngIf="studentData"
         [title]="title"
         [description]="description"
         [action]="action"
         [actionFunction]="actionFunction"
+        [studentData]="studentData"
     ></app-student-form>
 </div>

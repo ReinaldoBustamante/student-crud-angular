@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { StudentFormComponent } from '../../components/student-form/student-form.component';
 import { Validators } from '@angular/forms';
+import { StudentsService } from '../../services/students.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-student',
@@ -9,6 +11,10 @@ import { Validators } from '@angular/forms';
   styleUrl: './create-student.component.scss'
 })
 export class CreateStudentComponent {
+  constructor(
+    private studentService: StudentsService
+  ){}
+
   title: string = 'Nuevo Estudiante'
   description: string = 'Completa el formulario para registrar un nuevo estudiante'
   action: string = 'Crear'
@@ -21,16 +27,18 @@ export class CreateStudentComponent {
     birthdate: [Validators.required],
     career: [Validators.required]
   }
-
-
-  actionFunction(payload: {
+  
+  actionFunction = (payload: {
     name: string,
     lastName: string,
     email: string,
     phoneNumber: string,
     birthdate: Date,
     career: string
-  }){
-    console.log(payload)
+  }) => {
+    this.studentService.createStudent({
+      ...payload,
+      birthdate: new Date(payload.birthdate).toISOString()
+    })
   }
 }

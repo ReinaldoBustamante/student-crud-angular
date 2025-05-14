@@ -2,7 +2,7 @@
     <div class="student-information">
         <span>JP</span>
         <div class="contact">
-            <p class="name">{{ name }}</p>
+            <p class="name">{{ name }} {{ lastName }}</p>
             <p class="career">{{ career }}</p>
             <p class="email">{{ email }}</p>
             <p class="phonenumber">{{ phonenumber }}</p>
@@ -10,6 +10,6 @@
     </div>
     <div class="student-options">
         <button class="edit" (click)="toEditStudent(id)">Editar</button>
-        <button class="delete">Eliminar</button>
+        <button class="delete" (click)="deleteStudent(id)">Eliminar</button>
     </div>
 </div>

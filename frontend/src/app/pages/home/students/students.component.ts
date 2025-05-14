@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentComponent } from '../student/student.component';
+import { StudentsService } from '../../../services/students.service';
 
 @Component({
   selector: 'app-students',
@@ -9,15 +10,22 @@ import { StudentComponent } from '../student/student.component';
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss'
 })
-export class StudentsComponent {
-  constructor(private router: Router){}
+export class StudentsComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private studentService: StudentsService
+  ){
+    this.studentService.getStudents()
+  }
 
-  students = [
-    {id: 1, name: 'Juan Peréz', career: 'Ingenieria informática', email: 'juan.perez@ejemplo.com', phonenumber: '555-123-4567'},
-    {id: 2, name: 'Maria González', career: 'Medicina', email: 'maria.gonzalez@ejemplo.com', phonenumber: '555-987-6543'},
-    {id: 3, name: 'Carlos Rodríguez', career: 'Derecho', email: 'carlos.rodriguez@ejemplo.com', phonenumber: '555-222-3333'},
-    {id: 4, name: 'Elena Díaz', career: 'Arquitectura', email: 'elena.diaz@ejemplo.com', phonenumber: '555-444-5555'}
-  ]
+  students: any = []
+
+  ngOnInit(): void {
+    this.studentService.students$.subscribe(res => {
+      this.students = res
+    })
+
+  }
   
   toEditStudent(id: number){
     this.router.navigate([`/edit/:${id}`])
